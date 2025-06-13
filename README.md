@@ -1,57 +1,93 @@
 
+# 📱 Mobi-Insights – Power BI Dashboard
 
-# 🚀 Mobi-Insights 📊
-
-**An Interactive Power BI Dashboard for Mobile Sales and Market Analytics**
-
----
-
-## 📌 Project Overview
-
-**Mobi-Insights** is a dynamic, data-driven Power BI dashboard that analyzes mobile phone sales, features, pricing trends, and market insights. This project demonstrates the power of interactive data storytelling using advanced **DAX calculations**, **KPI visuals**, and **custom slicers/cards** for deep business intelligence.
-
-🔍 **Goal**: To provide stakeholders with meaningful insights into mobile phone data to aid in strategic decision-making and competitive analysis.
+### 🔍 **Data-Driven Business Intelligence for Mobile Sales & Customer Analytics**
 
 ---
 
-## 📦 Data Source
+## 🧠 Project Summary
 
-- 📁 **Dataset**: [Kaggle - ](https://www.kaggle.com/datasets/iabhishekofficial/mobile-price-classification)Mobile Sale Dataset
-- 📊 Contains: Transaction ID,Date,Day Name,Brand,Units Sold,Price Per Unit,Customer Name,Customer Age,	City,	Payment Method,Customer Ratings,Mobile Model
+**Mobi-Insights** is a fully interactive and insights-rich Power BI dashboard designed to analyze mobile sales and customer behavior using real-time business metrics. Leveraging **DAX formulas**, **slicers**, **KPIs**, and visual storytelling, this project delivers actionable insights for marketing, sales, and executive teams.
 
-## 🔧 Features & Tools Used
-
-| Category             | Details                                                                  |
-| -------------------- | ------------------------------------------------------------------------ |
-| 📌 Power BI Features | Tables, KPIs, Slicers, Cards, Stacked Bars, Pie Charts, Drill-through    |
-| 🧮 DAX Measures      | Custom Calculations for Total Sales, Average Price, Price Range Analysis |
-| 🧠 Interactivity     | Filters by Brand, RAM, Battery Power, Price Range, and more              |
-| 📈 Visualization     | Clean, minimal, and professional dashboards                              |
+📂 **Dataset Source**: [Kaggle – Mobile Sales Dataset]
+📈 **Tool Used**: Power BI Desktop
 
 ---
 
-## 📊 Dashboard Insights
+## 📊 Dataset Description
 
-### ✅ Key Highlights:
+The dataset contains real-time transactional sales data for mobile phones across cities, including customer demographics and preferences.
 
-- **KPI Indicators**: Track average mobile price, max RAM devices, and battery performance.
-- **Slicers**: Interactively filter data by brand, price range, camera specs, and more.
-- **Category-wise Analysis**: Visual comparison of features like battery vs price, RAM vs sales.
-- **Custom Cards**: Highlighted summary stats for quick business decision-making.
-
-![Dashboard Preview](dashboard_preview.png) *(replace with your actual screenshot)*
+| Column Name                                | Description                                 |
+| ------------------------------------------ | ------------------------------------------- |
+| `Transaction ID`                         | Unique identifier for each transaction      |
+| `Day`, `Month`, `Year`, `Day Name` | Date information for time-series insights   |
+| `Brand`                                  | Mobile phone brand (e.g., Samsung, Apple)   |
+| `Mobile Model`                           | Specific model sold                         |
+| `Units Sold`                             | Number of units in a transaction            |
+| `Price Per Unit`                         | Selling price of each unit                  |
+| `Customer Name`                          | Buyer’s name                               |
+| `Customer Age`                           | Buyer’s age group                          |
+| `City`                                   | Location of purchase                        |
+| `Payment Method`                         | Method of payment (Cash, UPI, Credit, etc.) |
+| `Customer Ratings`                       | Rating given by the customer (1-5 stars)    |
 
 ---
 
-## ⚙️ DAX Measures Examples
+## 🚀 Key Features
+
+✅ **KPI Cards**
+
+- Total Revenue
+- Average Customer Age
+- Best-Selling Brand
+- Highest Rated Model
+
+✅ **Interactive Slicers**
+
+- Filter by Brand, City, Day Name, Age Group, Payment Method
+
+✅ **DAX Measures**
+
+- Revenue = `Units Sold * Price Per Unit`
+- Average Rating by Brand
+- Monthly Sales Trend
+- Top 5 Cities by Revenue
+
+✅ **Time Series Analysis**
+
+- Sales trend by Month/Day Name
+- Peak Sales Day of the Week
+
+✅ **Customer Insights**
+
+- Age group buying trends
+- Preferred payment methods
+- City-wise customer ratings
+
+---
+
+## 📈 Visualizations
+
+| Page                  | Visuals                         |
+| --------------------- | ------------------------------- |
+| Overview Dashboard    | KPIs, Bar & Line Charts, Cards  |
+| Sales by Brand        | Brand-Wise Units Sold & Revenue |
+| Customer Demographics | Age Distribution, Ratings       |
+| Geo Analytics         | Map by City and Sales           |
+| Time Insights         | Heatmap of Sales by Day/Month   |
+
+---
+
+## 🧮 Sample DAX Formulas
 
 ```DAX
--- Total Mobile Sales
-TotalSales = SUM('MobileData'[Sales])
+-- Total Revenue
+Total Revenue = SUMX('Sales', 'Sales'[Units Sold] * 'Sales'[Price Per Unit])
 
--- Average Price by Brand
-AveragePrice = AVERAGE('MobileData'[Price])
+-- Average Rating by Brand
+Average Rating = AVERAGEX(FILTER('Sales', 'Sales'[Brand] = SELECTEDVALUE('Sales'[Brand])), 'Sales'[Customer Ratings])
 
--- High RAM Flag
-HighRAM = IF('MobileData'[RAM] >= 6, "High", "Low")
+-- Monthly Sales Trend
+Monthly Sales = CALCULATE([Total Revenue], ALLEXCEPT('Sales', 'Sales'[Month]))
 ```
